@@ -1,0 +1,32 @@
+{% extends 'Blog/templates/base.html %}
+{% block content %}
+{% if list %}
+	<table style="width: 100%">
+		<tr>
+			<th>글번호</th>
+			<th>제목</th>
+			<th>작성자</th>
+			<th>날짜</th>
+		</tr>
+		<!-- 뷰에서 'list'라는 이름에 객체들을 담아서 보냄 -->
+		{% for post in list %} 
+			<tr style="text-align: center;">
+				<td>
+					{{ post.id }}
+				</td>
+				<td>
+					<a href="{% url 'Blog:detail' post.id %}">{{ post.headline }}</a>
+				</td>
+				<td>
+					{{ post.author.username }}
+				</td>
+				<td>
+					{{ post.pub_date }}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<p>검색 결과가 없습니다.</p>
+{% endif %}
+{% endblock %}

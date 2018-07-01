@@ -1,0 +1,26 @@
+{% extends 'Blog/templates/base.html' %}
+{% block content %}
+<table>
+	<tr>
+		<th>제목</th>
+		<th>{{ post.headline }}/{{ post.pub_date }}</th>
+	</tr>
+	<tr>
+		<th>글쓴이</th>
+		<th>{{ post.author.username }}</th>
+	</tr>
+	<tr>
+		<th>내용</th>
+		<td>
+			<!-- 해당 Post 객체에 연결된 file 객체를 전부 불러옴 -->
+			{% for f in post.file_set.all %}
+				<a href="{{ f.file.url }}" download>다운로드</a>
+			{% endfor %}
+			{% for i in post.image_set.all %}
+				<img width="20%" src="{{ i.image.url }}" />
+			{% endfor %}
+			{{ post.content }}
+		</td>
+	</tr>
+</table>
+{% endblock %}

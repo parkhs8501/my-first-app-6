@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>로그인</title>
+</head>
+<body>
+	{%if error%}
+		<p><b>{{error}}</b></p>
+	{% endif %}
+	<form action="" method="POST">
+		{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="로그인">
+	</form>
+	<hr>
+	<a href="{% url 'social:begin' 'google-oauth2' %}">구글 계정으로 로그인하기</a>
+</body>
+</html>

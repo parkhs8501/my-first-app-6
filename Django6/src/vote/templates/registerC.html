@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>{{name}}의 답변 등록</h1>
+	{% if error %}
+		<p><b>{{error}}</b>
+	{% endif %}
+	<form action="" method="POST">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<input type="submit" value="등록">
+	</form>
+</body>
+</html>

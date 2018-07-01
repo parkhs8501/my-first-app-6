@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>{{ obj.question_text }}</h1>
+	<h3>{{ obj.pub_date }}</h3>
+	<ul>
+		{% for item in obj.choice_set.all %}
+			<li>{{item.choice_text}}의 투표 수 : {{item.votes}}</li>
+		{% endfor %}
+	</ul>
+	
+	<!-- <a> 태그를 이용해 메인페이지로 돌아가는 링크 만들기 -->
+	<a href="{% url 'vote:index' %}">메인으로</a>
+	<!-- <a> 태그를 이용해 '다시투표하기' 링크 생성. 
+	클릭시 해당 질문의 detail.html 전환 -->
+	<a href="{% url 'vote:detail' obj.id %}">다시투표하기</a>
+</body>
+</html>

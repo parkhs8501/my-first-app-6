@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- { % : 파이썬 문법 사용		{ { : 해당 영역에 데이터를 입력 -->
+	<!-- Question 객체 안에 있는 question_text 값을 입력 -->
+	<h1>{{ question.question_text }}</h1>
+	<h3>작성자 : {{question.author.username}}</h3>
+	<form action="{% url 'vote:vote' question.id %}" method="POST">
+		{% csrf_token %} <!-- 해당 폼이 유효한 폼인지, 다른 클라이언트에서 접근하지 못하도록 자동발급하는 일회용 키 -->
+		<!-- question.choice_set.all : Question 객체에 엮어있는 모든 Choice 객체들을 리스트 형태로 반환  -->
+		{% for choice in question.choice_set.all %}
+			<input type="radio" name="choice" value="{{ choice.id }}" id="choice{{forloop.counter}}">		
+			<label for="choice{{forloop.counter}}">{{ choice.choice_text }}</label>
+			{% if user.username == question.author.username %}	
+				<a href="{% url 'vote:deleteC' choice.id %}">답변 삭제</a>
+			{% endif %}
+			<br>
+		{% endfor %}
+		<input type="submit" value="투표" />
+	</form>
+	<!-- <a> 태그를 이용해 메인페이지로 돌아가는 링크 만들기 -->
+	<a href="{% url 'vote:index' %}">메인으로</a>
+	
+	<br><br>
+	{% if user.username == question.author.username %}
+		<a href="{% url 'vote:deleteQ' question.id %}">글 삭제</a>
+		<a href="{% url 'vote:updateQ' question.id %}">글 수정</a>
+		<a href="{% url 'vote:registerC' question.id %}">답변 등록</a>
+	{% endif %}
+</body>
+</html>

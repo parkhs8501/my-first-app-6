@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<a href="{% url 'vote:index' %}">투표 어플리케이션</a>
+	<a href="{% url 'Blog:index' %}">블로그 어플리케이션</a>
+	<br>
+	{% if user.is_auth %}
+		<p>{{user.username}}님 <a href="{% url 'customlogin:logout' %}">로그아웃</a></p>
+	{% else %}	
+		<a href="{% url 'customlogin:signup' %}">회원가입</a>
+		<a href="{% url 'customlogin:signin' %}">로그인</a>
+	{% endif %}
+	<hr> <!-- block : 해당 HTML 파일을 확장하는 다른 HTML 파일에서 추가적으로 확장할 수 있는 영역을 지정 -->
+	<!-- 검색창 -->
+	<form action="{% url 'Blog:searchP' %}" method="GET">
+		<select name="type">
+		<!-- views에서 type 0과 1로 정해놓음 -->
+			<option value="0" selected>제목</option>
+			<option value="1">글쓴이</option>
+		</select>
+		<input type="text" name="q">
+		<input type="submit" value="검색">
+	</form>
+	{% block content %}
+	{% endblock %}
+	<hr>
+	<p>경기도 안산시 상록구 </p>
+	<p>tel : 010-1234-5678</p>
+	
+</body>
+</html>

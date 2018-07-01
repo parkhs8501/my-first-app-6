@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>질문 생성</h1>
+	<!-- view에서 'error' 변수에 값을 넣었는지 확인 -->
+	{% if error %}
+		<p><strong>{{error}}</strong>
+	{% endif %}
+	<form action="" method="POST">
+		{% csrf_token %}
+		<table>
+		<!-- 폼객체.as_p <input>, <label>를 <p>를 이용해서 HTML 코드로 변환 -->
+		<!-- 폼객체.as_table : <input>와 <label>를 테이블 형태의 HTML 코드로 변환 -->
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="만들기"> 
+		<br>
+		<a href="{% url 'vote:index' %}">메인으로</a>
+		<!-- 
+		{% csrf_token %}
+		<input type="text" name="question_text" maxlength="200" id="a">
+		<label for="a">질문 이름</label>
+		<input type="submit" value="만들기"> 
+		<br>
+		<a href="{% url 'vote:index' %}">메인으로</a>
+		 -->
+		 
+	</form>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>잘못된 접근입니다.</title>
+</head>
+<body>
+	{% if error %}
+		<h1>{{ error }}</h1>
+	{% endif %}
+	
+	<a href="{{returnURL}}">해당 글로 넘어가기</a>
+</body>
+</html>
